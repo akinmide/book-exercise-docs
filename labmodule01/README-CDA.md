@@ -1,49 +1,26 @@
-# Constrained Device Application (Connected Devices)
-
 ## Lab Module 01
-
-Be sure to implement all the PIOT-CDA-* issues (requirements) listed at [PIOT-INF-01-001 - Lab Module 01](https://github.com/orgs/programming-the-iot/projects/1#column-9974937).
 
 ### Description
 
-NOTE: Include two full paragraphs describing your implementation approach by answering the questions listed below.
+The Constrained Device Application (CDA) provides the Python-based edge-device portion of the Programming the Internet of Things system. For this lab, I configured the CDA development environment in WSL2 using Ubuntu 22.04 and Python 3.10.12. I created a Python virtual environment, installed the required packages, and configured PYTHONPATH. The application successfully initializes, starts, and stops with exit code 0.
 
-What does your implementation do? 
-
-How does your implementation work?
+The implementation works through the ConstrainedDeviceApp class, which controls the application lifecycle. Its startApp() method starts the application, while stopApp() performs an orderly shutdown. I validated this behavior using ConstrainedDeviceAppTest. The test constructs the application, starts it, and stops it successfully.
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
-
-URL: 
+URL: https://github.com/akinmide/cda-python-components/tree/labmodule01
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
-
+ConstrainedDeviceAppTest creates and exercises ConstrainedDeviceApp. ConstrainedDeviceApp provides the startApp() and stopApp() lifecycle operations.
 
 ### Unit Tests Executed
 
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
-
-- 
-- 
-- 
+- No Lab Module 01-specific unit tests were required.
 
 ### Integration Tests Executed
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
-
-- 
-- 
-- 
-
-EOF.
+- Test case: ConstrainedDeviceAppTest
+- Test method: testRunConstrainedDeviceApp
+- Command: python -m unittest tests.integration.app.test_ConstrainedDeviceApp -v
+- Result: One test executed successfully (OK). The CDA initialized, started, and stopped with exit code 0.
