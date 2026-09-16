@@ -1,49 +1,37 @@
-# Gateway Device Application (Connected Devices)
-
 ## Lab Module 01
-
-Be sure to implement all the PIOT-GDA-* issues (requirements) listed at [PIOT-INF-01-001 - Lab Module 01](https://github.com/orgs/programming-the-iot/projects/1#column-9974937).
 
 ### Description
 
-NOTE: Include two full paragraphs describing your implementation approach by answering the questions listed below.
+The Gateway Device Application (GDA) provides the Java-based gateway portion of the Programming the Internet of Things system. For this lab, I configured the GDA development environment in WSL2 using Ubuntu 22.04, OpenJDK 17, and Apache Maven 3.6.3. Java 17 was used because the current InfluxDB client dependency contains Java 17 bytecode. The application compiled successfully and demonstrated the expected initialization, startup, and shutdown behavior.
 
-What does your implementation do? 
-
-How does your implementation work?
+The implementation works through the GatewayDeviceApp class, which controls the application lifecycle. Its startApp() method starts the application, while stopApp(0) performs an orderly shutdown with exit code 0. I validated this behavior using GatewayDeviceAppTest. The test starts the application, allows it to run for approximately 65 seconds, and then stops it. Maven was run without a forked test JVM because the intentional System.exit(0) call can otherwise be reported as an unexpected JVM termination.
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
-
-URL: 
+URL: https://github.com/akinmide/gda-java-components/tree/labmodule01
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
+```mermaid
+classDiagram
+    class GatewayDeviceApp {
+        +startApp()
+        +stopApp(exitCode)
+    }
 
+    class GatewayDeviceAppTest {
+        +testStartAndStopGatewayApp()
+    }
 
+    GatewayDeviceAppTest --> GatewayDeviceApp : creates and tests
+```
 ### Unit Tests Executed
 
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
-
-- 
-- 
-- 
+- No Lab Module 01-specific unit tests were required.
 
 ### Integration Tests Executed
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
-
-- 
-- 
-- 
-
-EOF.
+- Test case: GatewayDeviceAppTest
+- Test method: testStartAndStopGatewayApp
+- Command: mvn -Dtest=GatewayDeviceAppTest -DforkCount=0 test
+- Result: The GDA initialized, started successfully, stopped successfully, and returned exit code 0.
