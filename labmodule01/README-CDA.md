@@ -12,8 +12,19 @@ URL: https://github.com/akinmide/cda-python-components/tree/labmodule01
 
 ### UML Design Diagram(s)
 
-ConstrainedDeviceAppTest creates and exercises ConstrainedDeviceApp. ConstrainedDeviceApp provides the startApp() and stopApp() lifecycle operations.
+```mermaid
+classDiagram
+    class ConstrainedDeviceApp {
+        +startApp()
+        +stopApp(exitCode)
+    }
 
+    class ConstrainedDeviceAppTest {
+        +testRunConstrainedDeviceApp()
+    }
+
+    ConstrainedDeviceAppTest --> ConstrainedDeviceApp : creates and tests
+```
 ### Unit Tests Executed
 
 - No Lab Module 01-specific unit tests were required.

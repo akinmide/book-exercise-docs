@@ -12,8 +12,19 @@ URL: https://github.com/akinmide/gda-java-components/tree/labmodule01
 
 ### UML Design Diagram(s)
 
-GatewayDeviceAppTest creates and exercises GatewayDeviceApp. GatewayDeviceApp provides the startApp() and stopApp() lifecycle operations.
+```mermaid
+classDiagram
+    class GatewayDeviceApp {
+        +startApp()
+        +stopApp(exitCode)
+    }
 
+    class GatewayDeviceAppTest {
+        +testStartAndStopGatewayApp()
+    }
+
+    GatewayDeviceAppTest --> GatewayDeviceApp : creates and tests
+```
 ### Unit Tests Executed
 
 - No Lab Module 01-specific unit tests were required.
