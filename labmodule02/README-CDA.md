@@ -6,44 +6,37 @@ Be sure to implement all the PIOT-CDA-* issues (requirements) listed at [PIOT-IN
 
 ### Description
 
-NOTE: Include two full paragraphs describing your implementation approach by answering the questions listed below.
+The CDA implementation adds scheduled system-performance monitoring to the constrained device application. It collects CPU and memory utilization through specialized tasks, identifies each task using the configured name and type ID, and logs the resulting telemetry at the configured polling interval.
 
-What does your implementation do? 
-
-How does your implementation work?
+The implementation uses `BaseSystemUtilTask` as the common abstraction for system-utilization tasks. `SystemCpuUtilTask` and `SystemMemUtilTask` retrieve measurements through `psutil`, while `SystemPerformanceManager` schedules collection with APScheduler. `ConstrainedDeviceApp` creates the manager and starts or stops it with the application lifecycle.
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
 
-URL: 
+URL: https://github.com/akinmide/cda-python-components/tree/labmodule02
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
+```mermaid
+classDiagram
+    ConstrainedDeviceApp --> SystemPerformanceManager
+    SystemPerformanceManager --> SystemCpuUtilTask
+    SystemPerformanceManager --> SystemMemUtilTask
+    SystemCpuUtilTask --|> BaseSystemUtilTask
+    SystemMemUtilTask --|> BaseSystemUtilTask
+```
 
 
 ### Unit Tests Executed
 
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
 
-- 
-- 
-- 
+- `tests.unit.system.test_SystemCpuUtilTask.SystemCpuUtilTaskTest.testGetTelemetryValue`
+- `tests.unit.system.test_SystemMemUtilTask.SystemMemUtilTaskTest.testGetTelemetryValue`
 
 ### Integration Tests Executed
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
 
-- 
-- 
-- 
+- `tests.integration.system.test_SystemPerformanceManager.SystemPerformanceManagerTest.testStartAndStopManager`
+- `tests.integration.app.test_ConstrainedDeviceApp.ConstrainedDeviceAppTest.testRunConstrainedDeviceApp`
 
 EOF.

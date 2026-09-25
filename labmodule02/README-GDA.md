@@ -6,44 +6,37 @@ Be sure to implement all the PIOT-GDA-* issues (requirements) listed at [PIOT-IN
 
 ### Description
 
-NOTE: Include two full paragraphs describing your implementation approach by answering the questions listed below.
+The GDA implementation adds scheduled system-performance monitoring to the gateway device application. It collects system load and JVM heap-memory utilization through specialized Java tasks, identifies each task using its configured name and type ID, and logs the measurements at the configured polling interval.
 
-What does your implementation do? 
-
-How does your implementation work?
+The implementation uses the abstract `BaseSystemUtilTask` class as the common contract. `SystemCpuUtilTask` and `SystemMemUtilTask` obtain values through Java management APIs, while `SystemPerformanceManager` uses `ScheduledExecutorService` for periodic execution. `GatewayDeviceApp` creates the manager and controls it through the application start and stop lifecycle.
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
 
-URL: 
+URL: https://github.com/akinmide/gda-java-components/tree/labmodule02
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
+```mermaid
+classDiagram
+    GatewayDeviceApp --> SystemPerformanceManager
+    SystemPerformanceManager --> SystemCpuUtilTask
+    SystemPerformanceManager --> SystemMemUtilTask
+    SystemCpuUtilTask --|> BaseSystemUtilTask
+    SystemMemUtilTask --|> BaseSystemUtilTask
+```
 
 
 ### Unit Tests Executed
 
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
 
-- 
-- 
-- 
+- `programmingtheiot.unit.system.SystemCpuUtilTaskTest.testGetTelemetryValue`
+- `programmingtheiot.unit.system.SystemMemUtilTaskTest.testGetTelemetryValue`
 
 ### Integration Tests Executed
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
 
-- 
-- 
-- 
+- `programmingtheiot.integration.system.SystemPerformanceManagerTest.testStartAndStopManager`
+- `programmingtheiot.integration.app.GatewayDeviceAppTest.testStartAndStopGatewayApp`
 
 EOF.
