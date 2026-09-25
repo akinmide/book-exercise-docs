@@ -12,7 +12,7 @@
 - [x] [PIOT-GDA-02-005](https://github.com/programming-the-iot/book-exercise-tasks/issues/47)
 - [x] [PIOT-GDA-02-006](https://github.com/programming-the-iot/book-exercise-tasks/issues/46)
 - [x] [PIOT-GDA-02-007](https://github.com/programming-the-iot/book-exercise-tasks/issues/44)
-- [ ] [PIOT-GDA-02-100](https://github.com/programming-the-iot/book-exercise-tasks/issues/37)
+- [x] [PIOT-GDA-02-100](https://github.com/programming-the-iot/book-exercise-tasks/issues/37)
 
 ### OPTIONAL for Connected Devices Course (do these BEFORE PIOT-GDA-02-100!)
 
